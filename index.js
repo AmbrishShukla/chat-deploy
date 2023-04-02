@@ -128,7 +128,7 @@ app.post("/register", async (req, res) => {
 
 // const port = process.env.PORT || 4040;
 const server = app.listen(10000,()=>{
-  console.log(`server started on port ${port}`);
+  console.log("server started on port 10000");
 });
 
 const wss = new ws.WebSocketServer({ server });
