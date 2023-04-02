@@ -41,12 +41,6 @@ async function getUserDataFromRequest(req) {
   });
 }
 
-// static files
-app.use(express.static(path.join(__dirname, "./client/dist")));
-
-app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "./client/dist/index.html"));
-});
 
 app.get("/test", (req, res) => {
   res.json("test ok");
@@ -132,7 +126,8 @@ app.post("/register", async (req, res) => {
   }
 });
 
-const server = app.listen(4040);
+const port = process.env.PORT || 4040;
+const server = app.listen(port);
 
 const wss = new ws.WebSocketServer({ server });
 
@@ -227,4 +222,12 @@ wss.on("connection", (connection, req) => {
 
   // notify everyone about online people (when someone connects)
   notifyAboutOnlinePeople();
+});
+
+
+// static files
+app.use(express.static(path.join(__dirname, "./client/dist")));
+
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "./client/dist/index.html"));
 });
