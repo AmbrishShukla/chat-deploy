@@ -41,12 +41,6 @@ async function getUserDataFromRequest(req) {
   });
 }
 
-// static files
-app.use(express.static(path.join(__dirname, "./client/dist")));
-
-app.get("*", function (req, res) {
-  res.sendFile(path.join(__dirname, "./client/dist/index.html"));
-});
 
 app.get("/test", (req, res) => {
   res.json("test ok");
@@ -228,4 +222,12 @@ wss.on("connection", (connection, req) => {
 
   // notify everyone about online people (when someone connects)
   notifyAboutOnlinePeople();
+});
+
+
+// static files
+app.use(express.static(path.join(__dirname, "./client/dist")));
+
+app.get("*", function (req, res) {
+  res.sendFile(path.join(__dirname, "./client/dist/index.html"));
 });
